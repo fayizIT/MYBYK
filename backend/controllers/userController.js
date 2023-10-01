@@ -24,31 +24,34 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
-
+    const { name, email, password, mobileNumber } = req.body; // Use mobileNumber in the request body
+  
     const userExists = await User.findOne({ email });
-
+  
     if (userExists) {
-        res.status(400).json({ message: 'User Already Exists' });
+      res.status(400).json({ message: 'User Already Exists' });
     } else {
-        const user = await User.create({
-            name,
-            email,
-            password
+      const user = await User.create({
+        name,
+        email,
+        password,
+        mobile: mobileNumber, // Store the mobile number as 'mobile'
+      });
+  
+      if (user) {
+        generateToken(res, user._id);
+        res.status(201).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          mobile: user.mobile, // Include mobile in the response
         });
-
-        if (user) {
-            generateToken(res, user._id);
-            res.status(201).json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-            });
-        } else {
-            res.status(400).json({ message: 'Invalid Data' });
-        }
+      } else {
+        res.status(400).json({ message: 'Invalid Data' });
+      }
     }
-});
+  });
+  
 
 const logoutUser = asyncHandler(async (req, res) => {
     res.cookie('jwt','',{
