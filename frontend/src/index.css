@@ -22,3 +22,22 @@
     font-weight: bold;
   }
   
+
+
+
+
+/* delete icon */
+
+/* Add this to your CSS stylesheet */
+.delete-icon {
+  cursor: pointer;
+  color: red; /* Change the color as desired */
+  font-size: 20px; /* Adjust the font size as desired */
+  margin-right: 10px; /* Add margin for spacing */
+}
+
+.delete-icon:hover {
+  opacity: 0.7; /* Add hover effect */
+}
+
+

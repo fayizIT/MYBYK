@@ -1,6 +1,6 @@
 // ...import statements...
 
-import React from 'react';
+// import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
